@@ -47,7 +47,28 @@ if (Test-Port 3306) {
     if (Wait-Port 3306 60) { Write-Log 'MySQL started.' } else { Write-Log 'ERROR: MySQL did not start within 60s.' }
 }
 
-# 2. Laravel server
+# 2. Front-end assets: rebuild if any view, CSS or JS changed since the last
+#    build, because Tailwind only includes classes it saw at build time.
+$Manifest = Join-Path $ProjectDir 'public\build\manifest.json'
+$Npm      = 'C:\Program Files\nodejs\npm.cmd'
+$needBuild = -not (Test-Path $Manifest)
+if (-not $needBuild) {
+    $builtAt = (Get-Item $Manifest).LastWriteTime
+    $needBuild = [bool](Get-ChildItem (Join-Path $ProjectDir 'resources') -Recurse -File |
+        Where-Object { $_.LastWriteTime -gt $builtAt } | Select-Object -First 1)
+}
+Remove-Item (Join-Path $ProjectDir 'public\hot') -ErrorAction SilentlyContinue
+if ($needBuild) {
+    Push-Location $ProjectDir
+    & $Npm run build *> (Join-Path $LogDir 'build.log')
+    $code = $LASTEXITCODE
+    Pop-Location
+    if ($code -eq 0) { Write-Log 'Assets rebuilt.' } else { Write-Log "ERROR: asset build failed ($code), see build.log." }
+} else {
+    Write-Log 'Assets up to date.'
+}
+
+# 3. Laravel server
 if (Test-Port $AppPort) {
     Write-Log "Laravel already listening on $AppPort."
 } else {
@@ -59,7 +80,7 @@ if (Test-Port $AppPort) {
     if (Wait-Port $AppPort 30) { Write-Log 'Laravel server started.' } else { Write-Log "ERROR: Laravel did not start on $AppPort within 30s." }
 }
 
-# 3. Tailscale Serve (its config persists, but re-applying is harmless)
+# 4. Tailscale Serve (its config persists, but re-applying is harmless)
 if (Test-Path $Tailscale) {
     for ($i = 0; $i -lt 30; $i++) {
         $state = (& $Tailscale status --json 2>$null | ConvertFrom-Json).BackendState
