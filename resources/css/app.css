@@ -1,0 +1,254 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================
+   GLOBAL
+========================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #F4F7FC;
+    overflow: hidden;
+}
+
+/* ==========================================================
+   LAYOUT
+========================================================== */
+
+.app-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.main-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* ==========================================================
+   SIDEBAR
+========================================================== */
+
+.sidebar {
+    width: 270px;
+    background: #0B2E59;
+    color: #FFF;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+    box-shadow: 3px 0 12px rgba(0, 0, 0, .12);
+    flex-shrink: 0;
+}
+
+.sidebar.collapsed {
+    width: 80px;
+}
+
+.sidebar-top {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, .15);
+}
+
+.sidebar-logo {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+}
+
+.sidebar-title h5 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.sidebar-title small {
+    color: #CFD8DC;
+    font-size: 12px;
+}
+
+.sidebar.collapsed .sidebar-title {
+    display: none;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 20px 0;
+    margin: 0;
+    flex: 1;
+}
+
+.sidebar-menu li {
+    margin-bottom: 2px;
+}
+
+.menu-title {
+    color: #AFC5E6;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 15px 25px 10px;
+    font-weight: bold;
+}
+
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 14px 25px;
+    color: #FFF;
+    text-decoration: none;
+    transition: .25s;
+    border-left: 4px solid transparent;
+}
+
+.sidebar-menu a:hover {
+    background: #154882;
+}
+
+.sidebar-menu a.active {
+    background: #1C5EA7;
+    border-left: 4px solid #FFC72C;
+}
+
+.sidebar-menu a i {
+    width: 22px;
+    text-align: center;
+    font-size: 17px;
+}
+
+.sidebar.collapsed .sidebar-menu span,
+.sidebar.collapsed .menu-title {
+    display: none;
+}
+
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, .15);
+}
+
+.logout-btn {
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    background: #DC3545;
+    color: #FFF;
+    padding: 12px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.logout-btn:hover {
+    background: #BB2D3B;
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.header {
+    height: 70px;
+    background: #FFF;
+    border-bottom: 1px solid #E3E8EF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* ==========================================================
+   CONTENT
+========================================================== */
+
+.content-wrapper {
+    flex: 1;
+    overflow: auto;
+    padding: 30px;
+}
+
+/* ==========================================================
+   FOOTER
+========================================================== */
+
+.footer {
+    background: #FFF;
+    border-top: 1px solid #E5E5E5;
+    padding: 15px;
+    text-align: center;
+    color: #777;
+}
+
+/* ==========================================================
+   CARDS
+========================================================== */
+
+.dashboard-card {
+    background: #FFF;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, .08);
+    transition: .25s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-4px);
+}
+
+.blink-marker {
+
+    animation: pulseMarker 1.5s infinite;
+
+    transform-origin: center;
+
+}
+
+@keyframes pulseMarker {
+
+    0% {
+        opacity: 1;
+        stroke-width: 2;
+    }
+
+    50% {
+        opacity: .3;
+        stroke-width: 8;
+    }
+
+    100% {
+        opacity: 1;
+        stroke-width: 2;
+    }
+
+}
