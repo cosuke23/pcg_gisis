@@ -1,5 +1,5 @@
 {{-- <img 
-    src="{{ asset('images/pcg_logo.png') }}" 
+    src="{{ \App\Support\ClaudePane::logo() }}" 
     {{ $attributes->merge([
         'alt' => 'Philippine Coast Guard Logo'
     ]) }}

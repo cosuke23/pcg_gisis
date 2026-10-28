@@ -2,7 +2,7 @@
 
     <!-- Logo -->
     <div class="sidebar-top">
-        <img src="{{ asset('images/pcg_logo.png') }}" class="sidebar-logo" alt="PCG">
+        <img src="{{ \App\Support\ClaudePane::logo() }}" class="sidebar-logo" alt="PCG">
 
         <div class="sidebar-title">
             <h5>PCG</h5>

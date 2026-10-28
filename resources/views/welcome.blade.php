@@ -11,7 +11,7 @@
         <div class="text-center mb-6">
 
             <img 
-                src="{{ asset('images/pcg_logo.png') }}"
+                src="{{ \App\Support\ClaudePane::logo() }}"
                 class="mx-auto w-32 h-32 object-contain drop-shadow-lg"
             >
 

@@ -11,7 +11,7 @@
 
         <li class="nav-item d-flex align-items-center">
 
-            <img src="{{ asset('images/pcg_logo.png') }}"
+            <img src="{{ \App\Support\ClaudePane::logo() }}"
                  alt="PCG Logo"
                  style="height:40px;"
                  class="me-2">
