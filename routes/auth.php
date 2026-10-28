@@ -12,10 +12,16 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])
-        ->name('register');
+    // Public sign-up is off by default: the app is reachable from the internet
+    // via Tailscale Funnel, and self-registered users get full data access.
+    // Admins add users from User Management. Set ALLOW_PUBLIC_REGISTRATION=true
+    // in .env to turn it back on.
+    if (config('auth.allow_registration')) {
+        Route::get('register', [RegisteredUserController::class, 'create'])
+            ->name('register');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+        Route::post('register', [RegisteredUserController::class, 'store']);
+    }
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');

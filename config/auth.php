@@ -114,4 +114,17 @@ return [
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Public Registration
+    |--------------------------------------------------------------------------
+    |
+    | Whether anyone can create an account at /register. Off by default
+    | because the app is exposed on the internet; users are created by an
+    | administrator in User Management instead.
+    |
+    */
+
+    'allow_registration' => env('ALLOW_PUBLIC_REGISTRATION', false),
+
 ];

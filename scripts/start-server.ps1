@@ -1,5 +1,6 @@
 # Starts everything the tailnet link https://msi.tail7d94c9.ts.net needs:
-# XAMPP MySQL, the Laravel server on 127.0.0.1:8000, and Tailscale Serve.
+# XAMPP MySQL, the Laravel server on 127.0.0.1:8000, and Tailscale Funnel
+# (public on the internet; turn off with: tailscale funnel --https=443 off).
 # Safe to run more than once: anything already running is left alone.
 # Registered to run at logon via a shortcut in the Windows Startup folder.
 
@@ -80,15 +81,15 @@ if (Test-Port $AppPort) {
     if (Wait-Port $AppPort 30) { Write-Log 'Laravel server started.' } else { Write-Log "ERROR: Laravel did not start on $AppPort within 30s." }
 }
 
-# 4. Tailscale Serve (its config persists, but re-applying is harmless)
+# 4. Tailscale Funnel: public HTTPS on port 443 (config persists; re-applying is harmless)
 if (Test-Path $Tailscale) {
     for ($i = 0; $i -lt 30; $i++) {
         $state = (& $Tailscale status --json 2>$null | ConvertFrom-Json).BackendState
         if ($state -eq 'Running') { break }
         Start-Sleep -Seconds 2
     }
-    & $Tailscale serve --bg $AppPort 2>&1 | Out-Null
-    Write-Log "Tailscale Serve applied (backend state: $state)."
+    & $Tailscale funnel --bg $AppPort 2>&1 | Out-Null
+    Write-Log "Tailscale Funnel applied (backend state: $state)."
 } else {
     Write-Log 'ERROR: tailscale.exe not found.'
 }
