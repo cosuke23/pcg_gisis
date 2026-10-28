@@ -298,3 +298,117 @@ body {
 .small-box:hover > .icon {
     transform: translateY(-50%) scale(1.08);
 }
+
+
+/* ==========================================================
+   RESPONSIVE: tablets and phones (below Bootstrap's lg)
+   The sidebar becomes an off-canvas panel opened by the
+   header menu button; desktop layout is unchanged.
+========================================================== */
+
+.sidebar-backdrop {
+    display: none;
+}
+
+@media (max-width: 991.98px) {
+
+    .sidebar,
+    .sidebar.collapsed {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1045;
+        width: 270px;
+        max-width: 85vw;
+        overflow-y: auto;
+        /* Slide with left, not transform: a transform would make the
+           fixed chat button inside the sidebar move with the panel. */
+        left: -300px;
+        transition: left .3s ease;
+    }
+
+    .sidebar.mobile-open {
+        left: 0;
+    }
+
+    #chatBox {
+        max-width: calc(100vw - 40px);
+        max-height: calc(100vh - 120px);
+    }
+
+    /* Always show full labels in the slide-in panel. */
+    .sidebar.collapsed .sidebar-title {
+        display: block;
+    }
+
+    .sidebar.collapsed .sidebar-menu span {
+        display: inline;
+    }
+
+    .sidebar.collapsed .menu-title {
+        display: block;
+    }
+
+    .sidebar-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 1040;
+        background: rgba(0, 0, 0, .45);
+    }
+
+    .sidebar-backdrop.show {
+        display: block;
+    }
+
+    .header {
+        height: auto;
+        min-height: 60px;
+        padding: 8px 14px;
+        gap: 10px;
+    }
+
+    .header-left {
+        gap: 10px;
+        min-width: 0;
+    }
+
+    .header-left .ms-3 {
+        margin-left: 0 !important;
+        min-width: 0;
+    }
+
+    .header-left h4 {
+        font-size: .95rem;
+        line-height: 1.25;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .header-left small {
+        font-size: .75rem;
+    }
+
+    .header-right {
+        gap: 8px;
+        flex-shrink: 0;
+    }
+
+    .content-wrapper {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 575.98px) {
+
+    /* Phones: drop the user name, keep the Logout button. */
+    .header-right > span {
+        display: none;
+    }
+
+    .content-wrapper {
+        padding: 12px;
+    }
+}
