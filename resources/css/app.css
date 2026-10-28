@@ -252,3 +252,49 @@ body {
     }
 
 }
+
+/* Summary stat boxes (AdminLTE-style "small-box"), used on the Reports page.
+   AdminLTE itself is not loaded, so these styles live here. */
+.small-box {
+    position: relative;
+    display: block;
+    margin-bottom: 1.25rem;
+    border-radius: .5rem;
+    overflow: hidden;
+    color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .2);
+}
+
+.small-box > .inner {
+    position: relative;
+    z-index: 1;
+    padding: 1.1rem 1.25rem;
+}
+
+.small-box h3 {
+    margin: 0 0 .35rem;
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.1;
+    white-space: nowrap;
+}
+
+.small-box p {
+    margin: 0;
+    font-size: 1rem;
+    padding-right: 3.5rem;
+}
+
+.small-box > .icon {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    font-size: 3.25rem;
+    color: rgba(0, 0, 0, .18);
+    transition: transform .2s ease;
+}
+
+.small-box:hover > .icon {
+    transform: translateY(-50%) scale(1.08);
+}

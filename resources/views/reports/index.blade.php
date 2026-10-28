@@ -583,7 +583,9 @@
             }
 
         });
-        new Chart(
+        // The risk gauge card is commented out in the markup above, so only
+        // draw it when its canvas exists.
+        document.getElementById('riskGauge') && new Chart(
             document.getElementById('riskGauge'), {
 
                 type: 'doughnut',
